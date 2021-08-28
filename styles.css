@@ -1,0 +1,33 @@
+body {
+    background-color: #231f20;
+}
+
+@font-face {
+    font-family: PressStart;
+    src: url(PressStart2P-Regular.ttf);
+}
+
+.rpsHeader {
+    text-align: center;
+    font-size: 70px;
+    color: white;
+    font-family: 'PressStart';
+    padding-bottom: 50px;
+    transition: header-entrance 1.5s ease-in-out;
+    opacity: 0%;
+    transform: scale(0);
+}
+
+#rock {
+    margin-top: 150px;
+}
+
+.header-entrance {
+    opacity: 100%;
+    transform: scale(1);
+}
+
+.header-hover {
+    opacity: 70%;
+    transform: scale(0.97);
+}

@@ -61,6 +61,7 @@
       }
     }
 
+    // Function to start the game
     function Game() {
       rounds = parseInt(prompt("How many rounds would you like to play?"))
 
@@ -70,4 +71,16 @@
 
     }
 
-    Game();
+    // Window load sequence
+    let rpsHeaders = document.querySelectorAll(".rpsHeader");
+    window.addEventListener('load', function(e) {
+      rpsHeaders.forEach((header) => {
+        header.classList.add('header-entrance');
+        header.addEventListener('mouseout', function(e) {
+          header.classList.remove('header-hover');
+        })
+        header.addEventListener('mouseover', function(e) {
+          header.classList.add('header-hover');
+        })
+      })
+    })
