@@ -12,66 +12,71 @@
 
     function playRound(playerSelection, computerSelection) {
 
-      //Player Selection
-      playerSelection = prompt("Please choose between Rock, Paper, or Scissors");
-      playerSelection = playerSelection.toLowerCase();
-
       //Computer selection
       computerPlayer();
       computerSelection = computerPlayer();
-
-      console.log("The computer selected " + computerSelection + ", and the player selected " + playerSelection);
-
-
+ 
       if (playerSelection === "rock" && computerSelection === "rock") {
-        return("Tie! Try again.");
+        console.log("Tie! Try again.");
 
       } else if (playerSelection === "rock" && computerSelection === "paper") {
-        return("You lose! Paper beats rock");
+        console.log("You lose! Paper beats rock");
         computerScore++;
 
       } else if (playerSelection === "rock" && computerSelection === "scissors") {
-        return("You win! Rock beats scissors")
+        console.log("You win! Rock beats scissors");
         playerScore++;
 
       } if (playerSelection === "paper" && computerSelection === "paper") {
-        return("Tie! Try again.");
+        console.log("Tie! Try again.");
 
       } else if (playerSelection === "paper" && computerSelection === "rock") {
-        return("You win! Paper beats rock")
+        console.log("You win! Paper beats rock");
         playerScore++;
 
       } else if (playerSelection === "paper" && computerSelection === "scissors") {
-        return("You lose! Scissors beats paper")
+        console.log("You lose! Scissors beats paper");
         computerScore++;
 
       } if (playerSelection === "scissors" && computerSelection === "scissors") {
-        return("Tie! Try again.");
+        console.log("Tie! Try again.");
 
       } else if (playerSelection === "scissors" && computerSelection === "paper") {
-        return("You win! Scissors beats paper")
+        console.log("You win! Scissors beats paper");
         playerScore++;
 
       } else if (playerSelection === "scissors" && computerSelection === "rock") {
-        return("You lose! Rock beats paper")
+        console.log("You lose! Rock beats paper");
         computerScore++;
         
-      } else {
-        return("Please select a valid option");
+      }
+
+      if (playerScore === 5) {
+        paper.textContent = "You Win!";
+        paper.classList.add('game-over');
+        paper.classList.remove('rpsHeader');
+        rock.classList.add('hide');
+        scissors.classList.add('hide');
+        scoreKeeper.classList.add('hide');
+      } else if (computerScore === 5) {
+        paper.textContent = "You Lose!";
+        paper.classList.add('game-over');
+        rock.classList.add('hide');
+        scissors.classList.add('hide');
+        scoreKeeper.classList.add('hide');
       }
     }
 
     // Function to start the game
-    function Game() {
-      rounds = parseInt(prompt("How many rounds would you like to play?"))
-
-      for (i = 0; i < rounds; i++) {
-        console.log(playRound(playerSelection, computerSelection));
+    function game() {
+      for (i = 0; i < 5; i++) {
+        console.log(playRound());
       }
 
     }
 
     // Window load sequence
+    // Mouse hovering over headers
     let rpsHeaders = document.querySelectorAll(".rpsHeader");
     window.addEventListener('load', function(e) {
       rpsHeaders.forEach((header) => {
@@ -80,7 +85,35 @@
           header.classList.remove('header-hover');
         })
         header.addEventListener('mouseover', function(e) {
-          header.classList.add('header-hover');
+          if (playerScore < 5 && computerScore < 5) {
+            header.classList.add('header-hover');
+          }
         })
       })
     })
+
+    let scoreKeeper = document.querySelector("#scoreKeeper");
+
+        // Rock is selected
+        let rock = document.querySelector('#rock');
+        rock.addEventListener('click', function() {
+          playRound("rock", computerSelection);
+          scoreKeeper.textContent = "Player   " + playerScore + " - " + computerScore + "   Computer";
+  })
+  
+      // Paper is selected
+        let paper = document.querySelector('#paper');
+        paper.addEventListener('click', function() {
+          if (playerScore < 5 && computerScore < 5) {
+            playRound("paper", computerSelection);
+            scoreKeeper.textContent = "Player   " + playerScore + " - " + computerScore + "   Computer";
+          }
+  })
+  
+      // Scissors is selected
+        let scissors = document.querySelector('#scissors');
+        scissors.addEventListener('click', function() {
+          playRound("scissors", computerSelection);
+          scoreKeeper.textContent = "Player   " + playerScore + " - " + computerScore + "   Computer";
+  })
+
